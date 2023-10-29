@@ -1,0 +1,41 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Book;
+use Illuminate\Database\Seeder;
+
+class BookSeeder extends Seeder
+{
+    public function run(): void
+    {
+        Book::factory()
+            ->count(4)
+            ->sequence([
+                [
+                    'name' => 'Tray2',
+                    'email' => 'tray2@example.com',
+                    'country' => 'Sweden',
+                    'drink' => 'Stout',
+                ],
+                [
+                    'name' => 'Rene',
+                    'email' => 'rene@example.com',
+                    'country' => 'Denmark',
+                    'drink' => 'Beer',
+                ],
+                [
+                    'name' => 'Jenny',
+                    'email' => 'jen@example.com',
+                    'country' => 'Sweden',
+                    'drink' => 'Festis',
+                ],
+                [
+                    'name' => 'Nicke',
+                    'email' => 'nicke@example.com',
+                    'country' => 'Sweden',
+                    'drink' => 'Sprite',
+                ],
+            ])->create();
+    }
+}

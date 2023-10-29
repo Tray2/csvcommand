@@ -1,0 +1,66 @@
+{
+  "name": "tray2/csvcommand",
+  "homepage": "https://github.com/tray2/csvcommand",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "csv",
+    "seeder",
+    "database"
+  ],
+  "authors": [
+    {
+      "name": "Tray2",
+      "email": "github@tray2.se",
+      "homepage": "https://tray2.se",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Tray2\\MakeSeeder\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/",
+      "App\\Models\\": "app/Models/",
+      "Database\\Factories\\": "app/database/factories/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tray2\\MakeSeeder\\MakeSeederServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "ext-dom": "*",
+    "ext-libxml": "*",
+    "illuminate/support": "*",
+    "illuminate/testing": "^9.0|^10.0",
+    "symfony/css-selector": "^6.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.2",
+    "mockery/mockery": "^1.6",
+    "nunomaduro/larastan": "^2.2",
+    "orchestra/testbench": "^7.0|^8.0",
+    "pestphp/pest": "^1.0",
+    "phpstan/extension-installer": "^1.2",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.1",
+    "vimeo/psalm": "^4.29"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
