@@ -4,12 +4,12 @@ namespace Tray2\MakeSeeder;
 
 class ModelFinder
 {
-    protected  string $namespace = __DIR__ .'/../app/Models';
+    protected  string $modelPath = __DIR__ .'/../app/Models';
 
-    public function __construct(string $namespace = '')
+    public function __construct(string $modelPath = '')
     {
-        if ($namespace !== '') {
-            $this->namespace = __DIR__ . '/../' . str_replace('\\', '/', $namespace);
+        if ($modelPath !== '') {
+            $this->modelPath = __DIR__ . '/../' . str_replace('\\', '/', $modelPath);
         }
     }
 
@@ -19,7 +19,7 @@ class ModelFinder
             if (str_ends_with($file, '.php')) {
                 return str_replace('.php', '', $file);
             }
-        }, scandir($this->namespace))));
+        }, scandir($this->modelPath))));
         return $files;
     }
 
