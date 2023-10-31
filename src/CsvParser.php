@@ -30,18 +30,26 @@ class CsvParser
     {
         $stub = file_get_contents($this->stubsDir);
 
+        if(! $stub) {
+            return;
+        }
+
         $migration = fopen($this->destinationDir . $this->model . 'Seeder.php', 'wb');
 
         $stub = str_replace(['{Model}', '{Seeder}', '{Rows}'],
                             [$this->model, $this->generateSeeders($csvPath, $noHeader), $this->row], $stub);
-        fwrite($migration, $stub );
-        fclose($migration);
+        if ($migration) {
+            fwrite($migration, $stub );
+            fclose($migration);
+        }
     }
 
-    protected function generateSeeders(string $csvPath, $noHeader): string
+    protected function generateSeeders(string $csvPath, bool $noHeader): string
     {
         $fLoader = new FileLoader($csvPath, $this->separator);
+
         $rows = array_chunk($fLoader->getContent(), $fLoader->columnsCount());
+        $columns = [];
 
         $seeder = '';
         if ($noHeader) {

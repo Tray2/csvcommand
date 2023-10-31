@@ -3,6 +3,7 @@
 namespace Tray2\MakeSeeder\Exceptions;
 
 use Exception;
+use Throwable;
 
 class ClassNotFoundException extends Exception
 {

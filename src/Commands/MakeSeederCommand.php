@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tray2\MakeSeeder\CsvParser;
@@ -82,7 +83,7 @@ class MakeSeederCommand extends Command implements PromptsForMissingInput
         return (new ModelFinder())->find();
     }
 
-    protected function showSelect(InputInterface $input, $argument, mixed $label): void
+    protected function showSelect(InputInterface $input, InputArgument $argument, mixed $label): void
     {
         $options = $this->loadModels();
         $input->setArgument($argument->getName(), select(
@@ -91,7 +92,7 @@ class MakeSeederCommand extends Command implements PromptsForMissingInput
         ));
     }
 
-    protected function showTextInput(InputInterface $input, $argument, mixed $label): void
+    protected function showTextInput(InputInterface $input, InputArgument $argument, mixed $label): void
     {
         $input->setArgument($argument->getName(), text(
             label: $label,
@@ -99,7 +100,7 @@ class MakeSeederCommand extends Command implements PromptsForMissingInput
         ));
     }
 
-    protected function getLabel($argument): mixed
+    protected function getLabel(InputArgument $argument): mixed
     {
         return $this->promptForMissingArgumentsUsing()[$argument->getName()] ??
             'What is ' . lcfirst($argument->getDescription() ?: ('the ' . $argument->getName())) . '?';
@@ -114,7 +115,8 @@ class MakeSeederCommand extends Command implements PromptsForMissingInput
                 $label = $this->getLabel($argument);
 
                 if ($label instanceof Closure) {
-                    return $input->setArgument($argument->getName(), $label());
+                    $input->setArgument($argument->getName(), $label());
+                    return;
                 }
 
                 if (is_array($label)) {
